@@ -22,7 +22,7 @@ export default StyleSheet.create({
     color: "#cb6350",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,
-    textShadowColor: "black",
+    textShadowColor: "#ffeecc",
     padding: 5,
   },
 

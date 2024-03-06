@@ -4,7 +4,7 @@ import { MONGO_URI } from "@env";
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI, {
-      // MONGO_URI is the environment variable that holds our MongoDB connection string, which i set in the .env file.
+      // MONGO_URI is the environment variable that holds the MongoDB connection string, which i set in the .env file.
     });
     console.log("MongoDB Connected...");
   } catch (err) {

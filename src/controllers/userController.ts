@@ -2,103 +2,88 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import { Schema, model, Document } from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
+// @route   POST api/users
+// @desc    Register user
 export const registerUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
-    let user = await User.findOne({ email });
-
-    if (!user) {
-      user = new User({
-        email,
-        password,
-      });
-
-      await user.save();
-
-      return res.status(201).json({
-        success: true,
-        message: "User registered successfully",
-      });
-    } else {
-      return res.status(400).json({
-        success: false,
-        message: "User already exists",
-      });
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Please enter all fields" });
     }
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({
-      success: false,
-      message: "Server error",
+
+    // Check for existing user
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ msg: "User already exists" });
+    }
+
+    // Get salt and hash password
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    // Create new user
+    const newUser = new User({
+      email,
+      password: hashedPassword,
     });
+
+    await newUser.save();
+
+    // Generate token
+    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.status(201).json({
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+      },
+      token,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
-// export const loginUser = async (req: Request, res: Response) => {
-//   const { email, password } = req.body;
+// @route   POST api/users/login
+// @desc    Login user
 
-//   try {
-//     let user = await User.findOne({ email });
+export const loginUser = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
 
-//     if (!user || !(await user.isPasswordCorrect(password))) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "Invalid credentials",
-//       });
-//     }
+  try {
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ msg: "User does not exist" });
 
-//     // Return jsonwebtoken
-//     const token = user.getSignedToken();
-//     export interface IUser extends Document {
-//         email: string;
-//         password: string;
-//         isPasswordCorrect(password: string): Promise<boolean>;
-//     }
+    // Compare Password
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Invalid credentials" });
+    }
 
-//     userSchema.methods.isPasswordCorrect = async function (password: string): Promise<boolean> {
-//         return await bcrypt.compare(password, this.password);
-//     };
+    // Generate token
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
 
-//     const User = model<IUser>("User", userSchema);
-
-//     export default User;
-
-//     return res.status(200).json({
-//       success: true,
-//       token,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Server error",
-//     });
-//   }
-// };
-
-// @route   GET api/users/current
-// @desc    Get current user
-// @access  Private
-// const getCurrentUser = async (req: Request, res: Response) => {
-//   try {
-//     const user = await User.findById(req.user.id);
-//     return res.status(200).json({
-//       success: true,
-//       data: user,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     return res.status(500).json({
-//       success: false,
-//       message: "Server error",
-//     });
-//   }
-// };
-
+    // Respond with user (without password) and token.
+    res.json({
+      user: {
+        id: user.id,
+        email: user.email,
+      },
+      token,
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 export default {
   registerUser,
-  //   loginUser,
+  loginUser,
   //   getCurrentUser,
 };

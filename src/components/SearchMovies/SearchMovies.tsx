@@ -11,7 +11,7 @@ import {
   searchMoviesAndTvShows,
   getTrailer,
   getProviderLogoURLs,
-} from "../../services/api";
+} from "../../services/TMDB Services/api";
 import MovieInfoModal from "../movieInfoModal/MovieInfoModal";
 import MovieCard from "../movieCard/Moviecard";
 import { Movie } from "../../types/MovieType";

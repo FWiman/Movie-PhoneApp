@@ -13,7 +13,7 @@ import {
   getTrendingTvShows,
   getTopRatedMovies,
   getTopRatedTvShows,
-} from "../../services/api";
+} from "../../services/TMDB Services/api";
 import Layout from "../Layout/Layout";
 
 const TrendingContent = ({ navigation }) => {
