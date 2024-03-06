@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 import SearchMovies from "./src/components/SearchMovies/SearchMovies";
 import TrendingContent from "./src/components/TrendingContent/TrendingContent";
+import LoginPage from "./src/components/LoginPage/LoginPage";
 
 const Stack = createStackNavigator(); // Create a Stack navigator
 
@@ -17,12 +18,17 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TrendingContent">
+      <Stack.Navigator initialRouteName="LoginPage">
+        <Stack.Screen
+          name="LoginPage"
+          component={LoginPage}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="TrendingContent"
           component={TrendingContent}
           options={{ headerShown: false }}
-        />
+        ></Stack.Screen>
         <Stack.Screen
           name="SearchMovies"
           component={SearchMovies}
