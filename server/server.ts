@@ -2,9 +2,10 @@ import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv"; // Import the MONGO_URI environment variable from the @env module.
 import userRoutes from "./routes/userRoutes";
+import bcrypt from "bcryptjs";
 
 dotenv.config(); // Load the MONGO_URI environment variable from the .env file.
-const MONGO_URI = process.env.MONGO_URI; // Get the MONGO_URI environment variable from the process.env object.
+const MONGO_URI = process.env.MONGO_URI as string; // Get the MONGO_URI environment variable from the process.env object.
 
 const connectDB = async () => {
   try {
@@ -35,4 +36,15 @@ const startServer = async () => {
   });
 };
 
+// Test bcrypt with an example password and hashed version of it.
+async function testBcrypt() {
+  const password = "password123";
+  const hashedPassword = await bcrypt.hash(password, 10);
+  console.log("Hashed Password: ", hashedPassword);
+
+  const isMatch = await bcrypt.compare(password, hashedPassword);
+  console.log("Password Match: ", isMatch);
+}
+
+testBcrypt();
 startServer();

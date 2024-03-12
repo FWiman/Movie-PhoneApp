@@ -22,10 +22,15 @@ UserSchema.pre<IUser>("save", async function (next) {
 
   try {
     const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
-    this.password = await bcrypt.hash(this.password, salt);
+    const hash = await bcrypt.hash(this.password, salt);
+    this.password = hash;
     next();
-  } catch (err) {
-    next(err);
+  } catch (error: unknown) {
+    let errorMessage = "Server error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    next(new Error(errorMessage));
   }
 });
 

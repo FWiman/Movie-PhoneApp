@@ -2,6 +2,10 @@ import User from "../models/User";
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
+const JWT_SECRET = process.env.JWT_SECRET as string;
 
 // @route   POST api/users
 // @desc    Register user
@@ -32,7 +36,7 @@ export const registerUser = async (req: Request, res: Response) => {
     await newUser.save();
 
     // Generate token
-    const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: newUser.id }, JWT_SECRET, {
       expiresIn: "1d",
     });
 
@@ -43,8 +47,12 @@ export const registerUser = async (req: Request, res: Response) => {
       },
       token,
     });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error: unknown) {
+    let errorMessage = "Server error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    res.status(500).json({ error: errorMessage });
   }
 };
 
@@ -59,13 +67,17 @@ export const loginUser = async (req: Request, res: Response) => {
     if (!user) return res.status(400).json({ msg: "User does not exist" });
 
     // Compare Password
+    console.log("Fetched User:", user ? user.email : "No user found");
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("Password:", password);
+    console.log("User Password:", user.password);
+    console.log("Password Match:", isMatch);
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" });
     }
 
     // Generate token
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user.id }, JWT_SECRET, {
       expiresIn: "1d",
     });
 
@@ -77,12 +89,15 @@ export const loginUser = async (req: Request, res: Response) => {
       },
       token,
     });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (error: unknown) {
+    let errorMessage = "Server error";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    res.status(500).json({ error: errorMessage });
   }
 };
 export default {
   registerUser,
   loginUser,
-  //   getCurrentUser,
 };
