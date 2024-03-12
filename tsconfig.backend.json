@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2019", // Or as per your Node.js version support
+    "module": "CommonJS", // Node.js style modules
+    "outDir": "./dist", // Compiled JS files
+    "noEmit": false // Enable file emission for backend
+  },
+  "include": ["server/**/*"]
+}
