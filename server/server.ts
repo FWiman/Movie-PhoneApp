@@ -2,7 +2,8 @@ import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv"; // Import the MONGO_URI environment variable from the @env module.
 import userRoutes from "./routes/userRoutes";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
+import { body, validationResult } from "express-validator";
 
 dotenv.config(); // Load the MONGO_URI environment variable from the .env file.
 const MONGO_URI = process.env.MONGO_URI as string; // Get the MONGO_URI environment variable from the process.env object.
@@ -24,6 +25,18 @@ app.use(express.json()); // Middleware to parse JSON data in the request body.
 
 app.use("/api/users", userRoutes); // Use the userRoutes for requests to the /api/users path.
 
+// Validate the email and password in the request body. (Middleware)
+app.post(
+  "/api/users/login",
+  [body("email").isEmail(), body("password").isLength({ min: 6 })],
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  }
+);
+
 app.get("/", (_req: Request, res: Response) => {
   // Set up a route to handle GET requests to the root URL.
   res.send("API is running...");
@@ -36,15 +49,4 @@ const startServer = async () => {
   });
 };
 
-// Test bcrypt with an example password and hashed version of it.
-async function testBcrypt() {
-  const password = "password123";
-  const hashedPassword = await bcrypt.hash(password, 10);
-  console.log("Hashed Password: ", hashedPassword);
-
-  const isMatch = await bcrypt.compare(password, hashedPassword);
-  console.log("Password Match: ", isMatch);
-}
-
-testBcrypt();
 startServer();

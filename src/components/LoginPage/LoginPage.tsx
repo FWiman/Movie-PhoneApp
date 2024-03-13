@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, TouchableOpacity, Button } from "react-native";
+import { View, TextInput, Text, TouchableOpacity } from "react-native";
 import { login } from "../../services/Authentication Service/authService";
 import styles from "./LoginPageStyles";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -54,11 +54,7 @@ const LoginPage = ({ navigation }) => {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
         {/* Register Button */}
-        <TouchableOpacity
-          onPress={() => {
-            /* Navigate to Register Screen */
-          }}
-        >
+        <TouchableOpacity onPress={() => navigation.navigate("RegisterPage")}>
           <Text style={styles.registerButton}>
             Don't have an account? Register
           </Text>

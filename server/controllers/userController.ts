@@ -23,14 +23,10 @@ export const registerUser = async (req: Request, res: Response) => {
       return res.status(400).json({ msg: "User already exists" });
     }
 
-    // Get salt and hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
-
     // Create new user
     const newUser = new User({
       email,
-      password: hashedPassword,
+      password,
     });
 
     await newUser.save();
@@ -68,9 +64,10 @@ export const loginUser = async (req: Request, res: Response) => {
 
     // Compare Password
     console.log("Fetched User:", user ? user.email : "No user found");
+    console.log("User: ", user);
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("Password:", password);
-    console.log("User Password:", user.password);
+    console.log("Password: ", req.body.password);
+    console.log("User Password: ", user.password);
     console.log("Password Match:", isMatch);
     if (!isMatch) {
       return res.status(400).json({ msg: "Invalid credentials" });
