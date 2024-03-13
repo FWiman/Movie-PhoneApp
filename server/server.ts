@@ -37,6 +37,17 @@ app.post(
   }
 );
 
+app.post(
+  "/api/users/register",
+  [body("email").isEmail(), body("password").isLength({ min: 6 })],
+  (req: Request, res: Response) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  }
+);
+
 app.get("/", (_req: Request, res: Response) => {
   // Set up a route to handle GET requests to the root URL.
   res.send("API is running...");

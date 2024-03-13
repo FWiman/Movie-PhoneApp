@@ -22,7 +22,7 @@ export default StyleSheet.create({
     color: "#ffeecc",
     textShadowOffset: { width: 4, height: 4 },
     textShadowRadius: 4,
-    textShadowColor: "#cb6350",
+    textShadowColor: "#356B68",
     padding: 10,
   },
   input: {
@@ -33,7 +33,7 @@ export default StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#cb6350",
+    borderColor: "#356B68",
   },
   errorText: {
     color: "red",
@@ -43,7 +43,7 @@ export default StyleSheet.create({
     width: "50%",
     height: 50,
     backgroundColor: "#cb6350", // Adjust the color to match your theme
-    borderColor: "#cb6350",
+    borderColor: "#356B68",
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
