@@ -8,6 +8,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   strengthMeter: {
+    opacity: 0.6,
     height: "100%",
     justifyContent: "center",
     alignItems: "center",

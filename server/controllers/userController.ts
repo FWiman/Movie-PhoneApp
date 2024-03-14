@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { sendEmail } from "../../src/services/EmailService/emailService";
 
 dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET as string;
@@ -43,6 +44,19 @@ export const registerUser = async (req: Request, res: Response) => {
       },
       token,
     });
+
+    const emailOptions = {
+      to: newUser.email,
+      subject: "Welcome to the app",
+      text: "Thanks for signing up! We hope you enjoy our app, and please let us know if you have any questions :)",
+    };
+
+    try {
+      await sendEmail(emailOptions);
+      console.log("Welcome email sent successfully!");
+    } catch (error) {
+      console.error("Failed to send welcome email: ", error);
+    }
   } catch (error: unknown) {
     let errorMessage = "Server error";
     if (error instanceof Error) {
