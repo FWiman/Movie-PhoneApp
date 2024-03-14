@@ -6,7 +6,6 @@ import SearchMovies from "./src/components/SearchMovies/SearchMovies";
 import TrendingContent from "./src/components/TrendingContent/TrendingContent";
 import LoginPage from "./src/components/LoginPage/LoginPage";
 import RegisterPage from "./src/components/RegisterPage/RegisterPage";
-import Toast from "react-native-toast-message";
 
 const Stack = createStackNavigator(); // Create a Stack navigator
 
@@ -37,7 +36,6 @@ const App = () => {
           />
         </Stack.Navigator>
       </NavigationContainer>
-      <Toast />
     </>
   );
 };

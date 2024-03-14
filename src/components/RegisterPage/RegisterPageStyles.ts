@@ -29,7 +29,7 @@ export default StyleSheet.create({
   passwordContainer: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 12,
+    marginBottom: 0,
   },
   showPasswordButton: {
     position: "absolute",
@@ -54,5 +54,62 @@ export default StyleSheet.create({
   errorText: {
     color: "red",
     marginTop: 10,
+  },
+
+  // MODAL STYLES
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalView: {
+    width: "80%",
+    backgroundColor: "#ffeecc",
+    padding: 20,
+    borderRadius: 10,
+    alignItems: "center",
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#356B68",
+    marginBottom: 10,
+  },
+  modalText: {
+    fontSize: 18,
+    color: "#356B68",
+    marginBottom: 20,
+  },
+  modalButton: {
+    width: "50%",
+    height: 50,
+    backgroundColor: "#cb6350",
+    borderColor: "#356B68",
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 5,
+    marginTop: 20,
+  },
+  buttonClose: {
+    backgroundColor: "#356B68",
+  },
+
+  inputError: {
+    borderColor: "red",
+    borderWidth: 1,
+  },
+
+  loadingContainer: {
+    zIndex: 1,
+    position: "absolute",
+    left: 0,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(255,255,255,255.7)",
   },
 });
