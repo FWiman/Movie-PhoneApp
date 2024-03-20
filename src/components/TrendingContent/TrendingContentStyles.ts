@@ -36,10 +36,9 @@ export default StyleSheet.create({
 
   carouselItem: {
     flex: 1,
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    paddingTop: 1,
-    paddingBottom: 1,
   },
 
   noImage: {

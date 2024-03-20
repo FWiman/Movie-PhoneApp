@@ -5,26 +5,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: "column",
     width: "100%",
   },
 
   searchResults: {
     flex: 1,
-    padding: 10,
+    display: "flex",
     width: "100%",
+    height: "100%",
   },
 
   searchResultItem: {
-    width: 135,
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
     height: 200,
-    flexDirection: "row",
-    padding: 15,
+    marginTop: 5,
   },
 
   searchResultItemImage: {
     width: "100%",
-    height: 200,
+    height: "100%",
     resizeMode: "cover",
   },
 });

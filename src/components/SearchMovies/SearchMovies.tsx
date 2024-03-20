@@ -78,7 +78,7 @@ const SearchMovies = ({ route, navigation }) => {
       <View style={styles.searchContainer}>
         <FlatList
           style={styles.searchResults}
-          numColumns={3}
+          numColumns={4}
           data={movies}
           scrollEnabled
           keyExtractor={(movie) => movie.id.toString()}

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, ScrollView } from "react-native";
 import styles from "./TrendingContentStyles";
 import MovieCard from "../movieCard/Moviecard";
 import MovieInfoModal from "../movieInfoModal/MovieInfoModal";
 import { Movie } from "../../types/MovieType";
-import Carousel from "react-native-snap-carousel";
 
 import {
   getProviderLogoURLs,
@@ -156,25 +155,17 @@ const TrendingContent = ({ navigation }) => {
             Trending Movies This Week
           </Text>
           <View style={styles.carouselItem}>
-            <Carousel
-              data={trendingMovies}
-              renderItem={({ item }) => (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {trendingMovies.map((movie) => (
                 <MovieCard
-                  key={item.id}
-                  movie={item}
+                  key={movie.id}
+                  movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={providers[item.id] || []}
+                  logos={providers[movie.id] || []}
                 />
-              )}
-              style={styles.carouselItem}
-              sliderWidth={windowWidth}
-              itemWidth={windowWidth / 4}
-              inactiveSlideScale={0.9}
-              inactiveSlideOpacity={0.8}
-              loop={true}
-              firstItem={3}
-            />
+              ))}
+            </ScrollView>
           </View>
         </View>
         <View style={styles.carouselContainer}>
@@ -182,70 +173,49 @@ const TrendingContent = ({ navigation }) => {
             Trending TV Shows This Week
           </Text>
           <View style={styles.carouselItem}>
-            <Carousel
-              data={trendingTvShows}
-              renderItem={({ item }) => (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {trendingTvShows.map((movie) => (
                 <MovieCard
-                  key={item.id}
-                  movie={item}
+                  key={movie.id}
+                  movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={providers[item.id] || []}
+                  logos={providers[movie.id] || []}
                 />
-              )}
-              sliderWidth={windowWidth}
-              itemWidth={windowWidth / 4 - 0}
-              inactiveSlideScale={0.9}
-              inactiveSlideOpacity={0.8}
-              style={styles.carouselItem}
-              loop={true}
-            />
+              ))}
+            </ScrollView>
           </View>
         </View>
         <View style={styles.carouselContainer}>
           <Text style={styles.carouselContainerH2}>Top Rated Movies</Text>
           <View style={styles.carouselItem}>
-            <Carousel
-              data={topRatedMovies}
-              renderItem={({ item }) => (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {topRatedMovies.map((movie) => (
                 <MovieCard
-                  key={item.id}
-                  movie={item}
+                  key={movie.id}
+                  movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={topRatedProviders[item.id] || []}
+                  logos={providers[movie.id] || []}
                 />
-              )}
-              sliderWidth={windowWidth}
-              itemWidth={windowWidth / 4 - 0}
-              inactiveSlideScale={0.9}
-              inactiveSlideOpacity={0.8}
-              style={styles.carouselItem}
-              loop={true}
-            />
+              ))}
+            </ScrollView>
           </View>
         </View>
         <View style={styles.carouselContainer}>
           <Text style={styles.carouselContainerH2}>Top Rated TV Shows</Text>
           <View style={styles.carouselItem}>
-            <Carousel
-              data={topRatedTvShows}
-              renderItem={({ item }) => (
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {topRatedTvShows.map((movie) => (
                 <MovieCard
-                  key={item.id}
-                  movie={item}
+                  key={movie.id}
+                  movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={topRatedProviders[item.id] || []}
+                  logos={providers[movie.id] || []}
                 />
-              )}
-              sliderWidth={windowWidth}
-              itemWidth={windowWidth / 4 - 0}
-              inactiveSlideScale={0.9}
-              inactiveSlideOpacity={0.8}
-              style={styles.carouselItem}
-              loop={true}
-            />
+              ))}
+            </ScrollView>
           </View>
         </View>
         {isModalOpen && selectedMovie && (

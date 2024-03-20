@@ -14,7 +14,7 @@ const LoginPage = ({ navigation }) => {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      //   navigation.navigate("TrendingContent");
+      navigation.navigate("TrendingContent");
     } catch (error) {
       setError("Invalid email or password. Please try again.");
     }

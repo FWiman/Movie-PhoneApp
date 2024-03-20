@@ -56,7 +56,6 @@ const RegisterPage = ({ navigation }) => {
 
       setModalMessage("Registration successful! You will now be logged in :)");
       setModalVisible(true);
-      navigation.navigate("TrendingContent");
     } catch (error) {
       console.error("Registration failed: ", error.response.data);
       setModalMessage(`Registration failed: User already exists.`);
@@ -150,6 +149,7 @@ const RegisterPage = ({ navigation }) => {
               style={[styles.modalButton, styles.buttonClose]}
               onPress={() => {
                 setModalVisible(!modalVisible);
+                navigation.navigate("TrendingContent");
               }}
             >
               <Text style={styles.buttonText}>Close</Text>

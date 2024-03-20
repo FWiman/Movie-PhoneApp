@@ -9,6 +9,7 @@ export default StyleSheet.create({
     borderRadius: 10,
     backgroundColor: "red",
     overflow: "hidden",
+    marginHorizontal: 5,
   },
   movieImage: {
     width: "100%",
