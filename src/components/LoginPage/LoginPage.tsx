@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, TextInput, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  TextInput,
+  Text,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { login } from "../../services/Authentication Service/authService";
 import styles from "./LoginPageStyles";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -10,19 +16,32 @@ const LoginPage = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogin = async () => {
     try {
+      console.log("Logging in...");
+      setIsLoading(true);
       await login(email, password);
       navigation.navigate("TrendingContent");
+      console.log("Logged in successfully");
     } catch (error) {
       setError("Invalid email or password. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <Layout navigation={navigation}>
       <View style={styles.container}>
+        {isLoading && (
+          <ActivityIndicator
+            size="large"
+            color="#ffeecc"
+            style={styles.loadingIndicator}
+          />
+        )}
         <Text style={styles.title}>Login</Text>
         <TextInput
           style={styles.input}

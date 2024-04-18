@@ -60,4 +60,10 @@ export default StyleSheet.create({
     color: "#007bff",
     textAlign: "center",
   },
+
+  loadingIndicator: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+  },
 });

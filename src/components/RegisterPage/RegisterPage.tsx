@@ -56,14 +56,16 @@ const RegisterPage = ({ navigation }) => {
 
       setModalMessage("Registration successful! You will now be logged in :)");
       setModalVisible(true);
+
+      setTimeout(() => {
+        setIsLoading(false);
+        navigation.navigate("TrendingContent");
+      }, 3000);
     } catch (error) {
       console.error("Registration failed: ", error.response.data);
       setModalMessage(`Registration failed: User already exists.`);
-    } finally {
-      setTimeout(() => {
-        setIsLoading(false);
-        setModalVisible(true);
-      });
+      setIsLoading(false);
+      setModalVisible(true);
     }
   };
 
@@ -149,7 +151,6 @@ const RegisterPage = ({ navigation }) => {
               style={[styles.modalButton, styles.buttonClose]}
               onPress={() => {
                 setModalVisible(!modalVisible);
-                navigation.navigate("TrendingContent");
               }}
             >
               <Text style={styles.buttonText}>Close</Text>

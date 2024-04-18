@@ -48,8 +48,6 @@ const TrendingContent = ({ navigation }) => {
     setSelectedMovie(null);
   };
 
-  const windowWidth = Dimensions.get("window").width;
-
   useEffect(() => {
     const fetchContent = async (
       fetchMoviesFunction: { (): Promise<any>; (): Promise<any>; (): any },
@@ -196,7 +194,7 @@ const TrendingContent = ({ navigation }) => {
                   movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={providers[movie.id] || []}
+                  logos={topRatedProviders[movie.id] || []}
                 />
               ))}
             </ScrollView>
@@ -212,7 +210,7 @@ const TrendingContent = ({ navigation }) => {
                   movie={movie}
                   onPress={openModal}
                   isCarouselItem
-                  logos={providers[movie.id] || []}
+                  logos={topRatedProviders[movie.id] || []}
                 />
               ))}
             </ScrollView>
