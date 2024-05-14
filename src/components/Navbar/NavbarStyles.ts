@@ -7,16 +7,30 @@ export default StyleSheet.create({
   },
   navbar: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     height: 45,
     width: "100%",
-    backgroundColor: "transparent",
     marginTop: 10,
     paddingHorizontal: 10,
     // Add more styling as per your app's theme
   },
   iconContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    paddingBottom: 10,
+  },
+  searchInputContainer: {
+    flexDirection: "row",
+    flex: 1,
+    alignItems: "center",
+    position: "relative",
+  },
+
+  closeIconContainer: {
+    position: "absolute",
+    right: 20,
     justifyContent: "center",
     alignItems: "center",
     paddingBottom: 10,
