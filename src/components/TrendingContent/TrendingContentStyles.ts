@@ -19,10 +19,10 @@ export default StyleSheet.create({
     alignItems: "center",
     fontSize: 20,
     fontWeight: "bold",
-    color: "#cb6350",
-    textShadowOffset: { width: 1, height: 1 },
+    color: "#F5F5F5",
+    textShadowOffset: { width: 2, height: 2 },
     textShadowRadius: 1,
-    textShadowColor: "#ffeecc",
+    textShadowColor: "black",
     padding: 5,
   },
 

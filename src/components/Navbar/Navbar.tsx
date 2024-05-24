@@ -44,7 +44,7 @@ const Navbar = ({ navigation }) => {
   return (
     <ImageBackground
       style={styles.backgroundImage}
-      source={require("../../../assets/NavbarBackground.png")}
+      source={require("../../../assets/pxfuel.jpg")}
     >
       <View style={styles.navbar}>
         <TouchableOpacity
@@ -80,7 +80,7 @@ const Navbar = ({ navigation }) => {
           onPress={() => {} /* Handle menu press */}
           style={styles.iconContainer}
         >
-          <Icon name="menu" size={30} color="#fbf0d4" />
+          <Icon name="menu" size={30} color="black" />
         </TouchableOpacity>
       </View>
     </ImageBackground>

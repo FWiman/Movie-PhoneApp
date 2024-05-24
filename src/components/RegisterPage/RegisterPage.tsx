@@ -43,7 +43,7 @@ const RegisterPage = ({ navigation }) => {
 
     try {
       const response = await axios.post(
-        `http://192.168.0.170:5000/api/users/register`,
+        `http://192.168.0.168:5000/api/users/register`,
         {
           email,
           password,
@@ -57,12 +57,15 @@ const RegisterPage = ({ navigation }) => {
       setModalMessage("Registration successful! You will now be logged in :)");
       setModalVisible(true);
 
+      navigation.navigate("TrendingContent");
       setTimeout(() => {
         setIsLoading(false);
-        navigation.navigate("TrendingContent");
       }, 3000);
     } catch (error) {
-      console.error("Registration failed: ", error.response.data);
+      console.error(
+        "Registration failed: ",
+        error.response ? error.responsedata : error.message
+      );
       setModalMessage(`Registration failed: User already exists.`);
       setIsLoading(false);
       setModalVisible(true);

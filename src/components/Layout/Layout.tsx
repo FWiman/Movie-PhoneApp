@@ -6,7 +6,7 @@ const Layout = ({ children, navigation }) => {
   return (
     <ImageBackground
       style={styles.backgroundImage}
-      source={require("../../../assets/BackgroundImage2.png")}
+      source={require("../../../assets/DarkGreyAbstract.jpg")}
     >
       <View style={styles.container}>
         <Navbar navigation={navigation} />

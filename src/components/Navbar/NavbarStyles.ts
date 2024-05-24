@@ -5,6 +5,8 @@ export default StyleSheet.create({
     width: "100%",
     marginTop: 48,
   },
+
+  // #FF4500 Fire Orange    ##DAA520 Gold
   navbar: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -13,6 +15,14 @@ export default StyleSheet.create({
     width: "100%",
     marginTop: 10,
     paddingHorizontal: 10,
+    // Add more styling as per your app's theme
+  },
+
+  title: {
+    color: "black",
+    fontSize: 40,
+    fontWeight: "bold",
+    fontFamily: "",
     // Add more styling as per your app's theme
   },
   iconContainer: {

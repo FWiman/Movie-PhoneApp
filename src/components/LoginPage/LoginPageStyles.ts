@@ -19,10 +19,10 @@ export default StyleSheet.create({
   title: {
     fontSize: 50,
     fontWeight: "bold",
-    color: "#ffeecc",
-    textShadowOffset: { width: 4, height: 4 },
-    textShadowRadius: 4,
-    textShadowColor: "#356B68",
+    color: "#FF4500",
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 5,
+    textShadowColor: "black",
     padding: 10,
   },
   input: {
@@ -33,7 +33,7 @@ export default StyleSheet.create({
     marginVertical: 10,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#356B68",
+    borderColor: "#FF4500",
   },
   errorText: {
     color: "red",
@@ -42,8 +42,8 @@ export default StyleSheet.create({
   loginButton: {
     width: "50%",
     height: 50,
-    backgroundColor: "#cb6350", // Adjust the color to match your theme
-    borderColor: "#356B68",
+    backgroundColor: "#FF4500", // Adjust the color to match your theme
+    borderColor: "black",
     borderWidth: 1,
     justifyContent: "center",
     alignItems: "center",
@@ -51,13 +51,13 @@ export default StyleSheet.create({
     marginTop: 20,
   },
   buttonText: {
-    color: "#ffeecc",
+    color: "black",
     fontSize: 18,
     fontWeight: "500",
   },
   registerButton: {
     marginTop: 20,
-    color: "#007bff",
+    color: "#FF4500",
     textAlign: "center",
   },
 
